@@ -1,8 +1,8 @@
+require('dotenv').config();
 import React from "react"
 import Navbar from "./Components/Navbar"
 import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from 'uuid';
-
 function App() {
   const [todo, setTodo] = useState('');
   const [todos, setTodos] = useState([])
@@ -10,14 +10,14 @@ function App() {
 
   // fetch data from database 
   const getTasks = async () => {
-    let response = await fetch("http://localhost:3000/");
+    let response = await fetch(process.env.HOST);
     let tasks = await response.json();
     setTodos(tasks);
   }
 
   // add task in database 
   const addToDB = async (todo, id) => {
-    await fetch("http://localhost:3000/", {
+    await fetch( process.env.HOST, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -28,7 +28,7 @@ function App() {
 
   // Delete a task from database 
   const deleteToDB = async (id) => {
-    await fetch("http://localhost:3000/",
+    await fetch( process.env.HOST,
       {
         method: "DELETE",
         headers: {
