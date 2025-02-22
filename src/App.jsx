@@ -1,4 +1,4 @@
-require('dotenv').config();
+
 import React from "react"
 import Navbar from "./Components/Navbar"
 import { useState, useEffect } from "react";
