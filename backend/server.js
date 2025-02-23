@@ -8,9 +8,11 @@ const app = express()
 const port = 3000
 app.use(bodyParser.json())
 
+// const frontedUrl = 'http://localhost:5173';
+const frontedUrl = 'https://task-x-frontend.vercel.app';
 // Configuration for CORS
 const corsOptions = {
-    origin: process.env.FRONTEND_URL,
+    origin: frontedUrl,
     methods: ['GET', 'POST', 'DELETE','PUT'],
     allowedHeaders: ['Content-Type','Authorization'],
 };
@@ -24,13 +26,11 @@ const dbName = 'TaskX';
 
 // load all the data from the database 
 app.get('/', async(req, res) => {
-    
     await client.connect();
     const db = client.db(dbName);
     const collection = db.collection('Task Manager');
     const findResult = await collection.find({}).toArray();
     res.send(findResult);
-    // res.send("Successfully fetched data")
 })
 // Save data to database 
 app.post('/',async(req,res)=>{

@@ -9,14 +9,16 @@ function App() {
 
   // fetch data from database 
   const getTasks = async () => {
-    let response = await fetch(process.env.BACKEND_HOST);
+    let response = await fetch(backendUrl);
     let tasks = await response.json();
     setTodos(tasks);
   }
 
+  // const backendUrl = 'http://localhost:3000';
+  const backendUrl = 'https://task-x-backend.vercel.app';
   // add task in database 
   const addToDB = async (todo, id) => {
-    await fetch( process.env.BACKEND_HOST, {
+    await fetch(backendUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -27,7 +29,7 @@ function App() {
 
   // Delete a task from database 
   const deleteToDB = async (id) => {
-    await fetch( process.env.BACKEND_HOST,
+    await fetch(backendUrl,
       {
         method: "DELETE",
         headers: {
@@ -36,6 +38,7 @@ function App() {
         body: JSON.stringify({ id })
       })
   }
+
   // Load data from database when the app refresh
   useEffect(() => {
     getTasks();
