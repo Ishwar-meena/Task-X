@@ -43,5 +43,5 @@ app.delete('/',async(req,res)=>{
     res.json({success:true,data:deleteResult});
 })
 app.listen(port, () => {
-    console.log(`Example app listening on port http://localhost/${port}`)
+    console.log(`Example app listening on port http://localhost:${port}`)
 })
