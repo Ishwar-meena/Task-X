@@ -2,11 +2,19 @@ const { MongoClient } = require('mongodb');
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
-const app = express()
 require('dotenv').config();
-app.use(bodyParser.json())
-app.use(cors())
+
+const app = express()
 const port = 3000
+app.use(bodyParser.json())
+
+// Configuration for CORS
+const corsOptions = {
+    origin: process.env.FRONTEND_URL,
+    methods: ['GET', 'POST', 'DELETE','PUT'],
+    allowedHeaders: ['Content-Type','Authorization'],
+};
+app.use(cors(corsOptions));
 
 // Connection URL
 const url = process.env.MONGOURI;
